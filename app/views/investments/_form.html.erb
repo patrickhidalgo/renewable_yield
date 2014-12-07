@@ -1,0 +1,49 @@
+<%= form_for(@investment) do |f| %>
+  <% if @investment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@investment.errors.count, "error") %> prohibited this investment from being saved:</h2>
+
+      <ul>
+      <% @investment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :term %><br>
+    <%= f.number_field :term %>
+  </div>
+  <div class="field">
+    <%= f.label :interest_rate %><br>
+    <%= f.text_field :interest_rate %>
+  </div>
+  <div class="field">
+    <%= f.label :minimum_order %><br>
+    <%= f.number_field :minimum_order %>
+  </div>
+  <div class="field">
+    <%= f.label :denomination %><br>
+    <%= f.number_field :denomination %>
+  </div>
+  <div class="field">
+    <%= f.label :maturity_date %><br>
+    <%= f.date_select :maturity_date %>
+  </div>
+  <div class="field">
+    <%= f.label :issue_date %><br>
+    <%= f.date_select :issue_date %>
+  </div>
+  <div class="field">
+    <%= f.label :offer_start_period %><br>
+    <%= f.date_select :offer_start_period %>
+  </div>
+  <div class="field">
+    <%= f.label :offer_end_period %><br>
+    <%= f.date_select :offer_end_period %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

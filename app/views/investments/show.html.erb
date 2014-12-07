@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Term:</strong>
+  <%= @investment.term %>
+</p>
+
+<p>
+  <strong>Interest rate:</strong>
+  <%= @investment.interest_rate %>
+</p>
+
+<p>
+  <strong>Minimum order:</strong>
+  <%= @investment.minimum_order %>
+</p>
+
+<p>
+  <strong>Denomination:</strong>
+  <%= @investment.denomination %>
+</p>
+
+<p>
+  <strong>Maturity date:</strong>
+  <%= @investment.maturity_date %>
+</p>
+
+<p>
+  <strong>Issue date:</strong>
+  <%= @investment.issue_date %>
+</p>
+
+<p>
+  <strong>Offer start period:</strong>
+  <%= @investment.offer_start_period %>
+</p>
+
+<p>
+  <strong>Offer end period:</strong>
+  <%= @investment.offer_end_period %>
+</p>
+
+<%= link_to 'Edit', edit_investment_path(@investment) %> |
+<%= link_to 'Back', investments_path %>
