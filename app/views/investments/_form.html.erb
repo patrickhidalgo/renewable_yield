@@ -29,19 +29,23 @@
   </div>
   <div class="field">
     <%= f.label :maturity_date %><br>
-    <%= f.date_select :maturity_date %>
+    <%# f.date_select :maturity_date %>
+    <%= f.text_field :maturity_date %>
   </div>
   <div class="field">
     <%= f.label :issue_date %><br>
-    <%= f.date_select :issue_date %>
+    <%# f.date_select :issue_date %>
+    <% f.text_field :issue_date %>
   </div>
   <div class="field">
     <%= f.label :offer_start_period %><br>
-    <%= f.date_select :offer_start_period %>
+    <%# f.date_select :offer_start_period %>
+    <%= f.text_field :offer_start_period %>
   </div>
   <div class="field">
     <%= f.label :offer_end_period %><br>
-    <%= f.date_select :offer_end_period %>
+    <%# f.date_select :offer_end_period %>
+    <%= f.text_field :offer_end_period %>
   </div>
   <div class="actions">
     <%= f.submit %>

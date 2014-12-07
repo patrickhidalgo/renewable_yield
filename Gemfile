@@ -7,6 +7,7 @@ gem 'guard-rspec', '~> 4.3.1'
 gem 'factory_girl_rails'
 gem 'will_paginate'
 gem 'guard'
+gem 'jquery-ui-rails'
 
 group :test, :darwin, :development do
   gem 'ruby_gntp'
