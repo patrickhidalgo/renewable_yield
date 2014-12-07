@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @investor.first_name %>
+</p>
+
+<p>
+  <strong>Middle name:</strong>
+  <%= @investor.middle_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @investor.last_name %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @investor.phone_number %>
+</p>
+
+<p>
+  <strong>Street address:</strong>
+  <%= @investor.street_address %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @investor.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @investor.state %>
+</p>
+
+<p>
+  <strong>Zip:</strong>
+  <%= @investor.zip %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @investor.email %>
+</p>
+
+<p>
+  <strong>Ssn:</strong>
+  <%= @investor.ssn %>
+</p>
+
+<p>
+  <strong>Password:</strong>
+  <%= @investor.password %>
+</p>
+
+<p>
+  <strong>Password confirmation:</strong>
+  <%= @investor.password_confirmation %>
+</p>
+
+<%= link_to 'Edit', edit_investor_path(@investor) %> |
+<%= link_to 'Back', investors_path %>
