@@ -11,8 +11,7 @@ class CreateInvestors < ActiveRecord::Migration
       t.integer :zip
       t.string :email
       t.integer :ssn
-      t.string :password
-      t.string :password_confirmation
+      t.string :password_digest
 
       t.timestamps
     end

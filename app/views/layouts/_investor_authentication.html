@@ -1,0 +1,5 @@
+<% if current_investor %>
+  Signed in as <%= current_investor.email %>
+<% else %>
+  <%= link_to 'Investor Signup', new_investor_path %>
+<% end %>

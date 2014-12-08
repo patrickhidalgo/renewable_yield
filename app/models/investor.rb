@@ -1,4 +1,6 @@
 class Investor < ActiveRecord::Base
+  has_secure_password
+
   def self.seed_investor!
     20.times do |number|
       @first_name = Faker::Name.first_name

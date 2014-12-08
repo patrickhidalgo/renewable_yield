@@ -1,16 +1,18 @@
 Rails.application.routes.draw do
   resources :investors
 
+  resources :investors,
+            only: [:new, :create],
+            path_names: { new: "investor signup"}
+
   resources :providers
 
   resources :investments
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
   root 'welcome#index'
   get 'about' => 'about#index'
+
+  # get 'login' => 'sessions#login'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

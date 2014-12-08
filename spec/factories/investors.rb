@@ -10,8 +10,7 @@ state "MyString"
 zip 1
 email "MyString"
 ssn 1
-password "MyString"
-password_confirmation "MyString"
+password_digest "MyString"
   end
 
 end

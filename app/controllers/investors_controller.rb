@@ -28,7 +28,8 @@ class InvestorsController < ApplicationController
 
     respond_to do |format|
       if @investor.save
-        format.html { redirect_to @investor, notice: 'Investor was successfully created.' }
+        session[:id] = @investor.id
+        format.html { redirect_to @investor, notice: "Thank you for signing up #{@investor.first_name.titlecase}" }
         format.json { render :show, status: :created, location: @investor }
       else
         format.html { render :new }
@@ -69,6 +70,9 @@ class InvestorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def investor_params
-      params.require(:investor).permit(:first_name, :middle_name, :last_name, :phone_number, :street_address, :city, :state, :zip, :email, :ssn, :password, :password_confirmation)
+      params.require(:investor).permit(
+        :first_name, :middle_name, :last_name, :phone_number,
+        :street_address, :city, :state, :zip, :email, :ssn,
+        :password, :password_confirmation)
     end
 end
