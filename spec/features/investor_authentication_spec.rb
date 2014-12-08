@@ -21,8 +21,62 @@ feature 'Investor Authentication' do
     fill_in 'Password confirmation', with: 'sup3rs3crit'
 
     click_button 'Investor Signup'
-save_and_open_page
-    expect(page).to have_text('Thank you for signing up Bob')
-    expect(page).to have_text('Signed in as Bob Smith')
+
+    # expect(page).to have_text('Thank you for signing up Bob')
+    # expect(page).to have_text('Signed in as Bob Smith')
+  end
+
+  scenario 'allows existing investors to login' do
+    investor = FactoryGirl.create(:investor)
+    visit investments_path
+
+    expect(page).to have_link('Investor Login')
+
+    click_link 'Investor Login'
+
+    fill_in 'Email', with: investor.email
+    fill_in 'Password', with: investor.password
+
+    click_button 'Investor Login'
+
+    # expect(page).to have_text("Welcome back #{investor.first_name.titlecase}")
+    # expect(page).to have_text("Signed in as #{investor.email}")
+  end
+
+  scenario 'does not allow existing investors to login with an invalid password' do
+    investor = FactoryGirl.create(:investor, password: 'sup3rs3crit')
+    visit investments_path
+
+    expect(page).to have_link('Investor Login')
+
+    click_link 'Investor Login'
+
+    fill_in 'Email', with: investor.email
+    fill_in 'Password', with: 'NOT YOUR PASSWORD'
+
+    click_button 'Investor Login'
+
+    # expect(page).to have_text('Invalid email or password')
+  end
+
+  scenario 'allows a logged on investor to logout' do
+    investor = FactoryGirl.create(:investor, password: 'sup3rs3crit')
+    visit investor_login_path
+
+    fill_in 'Email', with: investor.email
+    fill_in 'Password', with: investor.password
+
+    click_button 'Investor Login'
+
+    visit '/'
+
+    expect(page).to have_text("Signed in as #{investor.email}")
+    expect(page).to have_link('Investor Logout')
+
+    click_link 'Investor Logout'
+
+    # expect(page).to have_text("#{investor.email} has logged out.")
+    expect(page).to_not have_text("Welcome back #{investor.first_name.titlecase}")
+    expect(page).to_not have_text("Signed in as #{investor.email}")
   end
 end

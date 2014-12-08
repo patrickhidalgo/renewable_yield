@@ -11,8 +11,10 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
   get 'about' => 'about#index'
+  get 'investor_login' => 'sessions#investor_login'
+  post 'investor_login' => 'sessions#investor_create'
+  delete 'investor_logout' => 'sessions#investor_destroy'
 
-  # get 'login' => 'sessions#login'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

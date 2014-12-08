@@ -1,5 +1,7 @@
 <% if current_investor %>
   Signed in as <%= current_investor.email %>
+  <%= link_to 'Investor Logout', investor_logout_path, method: :delete %>
 <% else %>
   <%= link_to 'Investor Signup', new_investor_path %>
+  <%= link_to 'Investor Login', investor_login_path %>
 <% end %>

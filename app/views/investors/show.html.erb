@@ -51,8 +51,13 @@
 </p>
 
 <p>
-  <strong>Password digest:</strong>
-  <%= @investor.password_digest %>
+  <strong>Password:</strong>
+  <%= @investor.password %>
+</p>
+
+<p>
+  <strong>Password confirmation:</strong>
+  <%= @investor.password_confirmation %>
 </p>
 
 <%= link_to 'Edit', edit_investor_path(@investor) %> |
