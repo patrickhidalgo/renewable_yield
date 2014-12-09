@@ -15,13 +15,10 @@ class SessionsController < ApplicationController
     end
   end
 
-  def logout
-
-  end
 
   def destroy
     if user = current_user
-      session[:user_id] = nil
+      session[:id] = nil
       redirect_to root_path, notice: "#{user.email} has been logged out."
     end
   end

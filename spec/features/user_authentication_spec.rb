@@ -22,7 +22,7 @@ feature 'User Authentication' do
 
     click_button 'Signup'
 
-    # expect(page).to have_text('Thank you for signing up Bob')
+    expect(page).to have_text('Thank you for signing up Bob')
     expect(page).to have_text('Signed in as bob@smith.com')
   end
 
@@ -39,7 +39,7 @@ feature 'User Authentication' do
 
     click_button 'Login'
 
-    # expect(page).to have_text("Welcome back #{user.first_name.titlecase}")
+    expect(page).to have_text("Welcome back #{user.first_name.titlecase}")
     expect(page).to have_text("Signed in as #{user.email}")
   end
 
@@ -56,7 +56,7 @@ feature 'User Authentication' do
 
     click_button 'Login'
 
-    # expect(page).to have_text('Invalid email or password')
+    expect(page).to have_text('Invalid email or password')
   end
 
   scenario 'allows a logged on User to logout' do
@@ -75,7 +75,7 @@ feature 'User Authentication' do
 
     click_link 'Logout'
 
-    expect(page).to have_text("#{user.email} has logged out.")
+    expect(page).to have_text("#{user.email} has been logged out.")
     expect(page).to_not have_text("Welcome back #{user.first_name.titlecase}")
     expect(page).to_not have_text("Signed in as #{user.email}")
   end
