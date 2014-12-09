@@ -8,6 +8,7 @@ gem 'factory_girl_rails'
 gem 'will_paginate'
 gem 'guard'
 gem 'jquery-ui-rails'
+gem 'cancan'
 
 group :test, :darwin, :development do
   gem 'ruby_gntp'

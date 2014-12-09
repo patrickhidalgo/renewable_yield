@@ -1,12 +1,13 @@
-class Investor < ActiveRecord::Base
+class User < ActiveRecord::Base
   has_secure_password
 
-  def self.seed_investor!
+  def self.seed_user!
     20.times do |number|
       @first_name = Faker::Name.first_name
       @password = Faker::Internet.password
 
-      Investor.create(
+      User.create(
+        :company_name => Faker::Company.name,
         :first_name => @first_name,
         :middle_name => Faker::Name.first_name,
         :last_name => Faker::Name.last_name,
@@ -22,4 +23,5 @@ class Investor < ActiveRecord::Base
       )
     end
   end
+
 end

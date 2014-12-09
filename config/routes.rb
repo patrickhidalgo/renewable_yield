@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
-  resources :investors
-
-  resources :investors,
-            only: [:new, :create],
-            path_names: { new: "investor signup"}
+  resources :users,
+    only: [:new, :create],
+    path_names: { new: "signup"}
 
   resources :providers
 
@@ -11,9 +9,9 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
   get 'about' => 'about#index'
-  get 'investor_login' => 'sessions#investor_login'
-  post 'investor_login' => 'sessions#investor_create'
-  delete 'investor_logout' => 'sessions#investor_destroy'
+  get 'login' => 'sessions#login'
+  post 'login' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

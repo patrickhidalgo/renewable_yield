@@ -3,11 +3,11 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :current_investor
+  helper_method :current_user
 
   private
 
-  def current_investor
-    @investor || Investor.find(session[:id]) if session[:id]
+  def current_user
+    @user || User.find(session[:id]) if session[:id]
   end
 end

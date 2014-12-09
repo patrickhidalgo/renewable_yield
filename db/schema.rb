@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141208052323) do
+ActiveRecord::Schema.define(version: 20141208170534) do
 
   create_table "investments", force: true do |t|
     t.integer  "term"
@@ -54,6 +54,23 @@ ActiveRecord::Schema.define(version: 20141208052323) do
     t.string   "company_email"
     t.string   "password"
     t.string   "password_confirmation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "company_name"
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.string   "phone_number"
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zip"
+    t.string   "email"
+    t.integer  "ssn"
+    t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
