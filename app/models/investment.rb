@@ -3,6 +3,9 @@ class Investment < ActiveRecord::Base
   validates :minimum_order, numericality: {
     greater_than: 999.99
   }
+
+  belongs_to :user
+
   def self.seed_investment!
     7.times do |number|
       @interest_rate = 1.50 + (0.50 * number)

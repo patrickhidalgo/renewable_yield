@@ -4,8 +4,14 @@ Rails.application.routes.draw do
     path_names: { new: "signup"}
 
   resources :providers
+  get 'my_investments' => 'investments#my_investments'
 
-  resources :investments
+  resources :investments do
+    member do
+      get 'invest' => 'investments#invest'
+      get 'divest' => 'investments#divest'
+    end
+  end
 
   root 'welcome#index'
   get 'about' => 'about#index'

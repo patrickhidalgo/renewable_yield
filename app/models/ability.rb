@@ -1,7 +1,19 @@
-class Ability
-  include 'cancan'
-
-  def initialize(user)
-    can :read, :all
-  end
-end
+# class Ability
+#   include CanCan::Ability
+#
+#   def initialize(user)
+#     user || User.new #guest user
+#     if user.role? :admin
+#       can :manage, :all
+#     else
+#       can :read, :all
+#     end
+#
+#     if user.role?(:manager)
+#       can [:create, :update, :destroy], Investment
+#       # can :update, Investment do |investment|
+#       #   investment.try(:user) == user
+#       end
+#     end
+#   end
+#

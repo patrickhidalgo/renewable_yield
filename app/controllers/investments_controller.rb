@@ -1,28 +1,39 @@
 class InvestmentsController < ApplicationController
-  before_action :set_investment, only: [:show, :edit, :update, :destroy]
+  # load_and_authorize_resource
+  before_action :set_investment, only: [:show, :edit, :update, :destroy, :invest, :divest]
 
-  # GET /investments
-  # GET /investments.json
-  def index
-    @investments = Investment.all
+  def invest
+    if current_user
+      current_user.investments << @investment
+      redirect_to investments_path, notice: "#{@investment.term} #{@investment.interest_rate} has been moved to your inventory."
+    end
   end
 
-  # GET /investments/1
-  # GET /investments/1.json
+  def divest
+    @investment.user = nil
+    @investment.save
+      redirect_to investments_path, notice: "#{@investment.term} #{@investment.interest_rate} has been sold!."
+    end
+
+  def index
+    @investments = Investment.where(user_id: nil).paginate(page: params[:page], per_page: 20)
+  end
+
+  def my_investments
+    @investments = Investment.where(user_id: current_user.id).paginate(page: params[:page], per_page: 20)
+    render 'investments/index'
+  end
+
   def show
   end
 
-  # GET /investments/new
   def new
     @investment = Investment.new
   end
 
-  # GET /investments/1/edit
   def edit
   end
 
-  # POST /investments
-  # POST /investments.json
   def create
     @investment = Investment.new(investment_params)
     creation_message = "#{@investment.term} year #{@investment.interest_rate}% rate was successfully created."
@@ -56,7 +67,7 @@ class InvestmentsController < ApplicationController
   # DELETE /investments/1
   # DELETE /investments/1.json
   def destroy
-    destroy_message = "#{@investment.term} year #{@investment.interest_rate}% rate was successfully deleted."
+    destroy_message = 'Investment was successfully destroyed.'
 
     @investment.destroy
     respond_to do |format|

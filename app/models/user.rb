@@ -1,5 +1,18 @@
 class User < ActiveRecord::Base
   has_secure_password
+  has_many :investments
+  # has_many :projects
+  validate :password, presence: true
+  #
+  # ROLES = %w[admin manager investor provider]
+  #
+  # def role_symbols
+  #   [role.to_sym]
+  # end
+  #
+  # def role?(role)
+  #   roles.include? role.to_s
+  # end
 
   def self.seed_user!
     20.times do |number|
@@ -23,5 +36,6 @@ class User < ActiveRecord::Base
       )
     end
   end
+
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141208170534) do
+ActiveRecord::Schema.define(version: 20141210035627) do
 
   create_table "investments", force: true do |t|
     t.integer  "term"
@@ -24,7 +24,10 @@ ActiveRecord::Schema.define(version: 20141208170534) do
     t.date     "offer_end_period"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "investments", ["user_id"], name: "index_investments_on_user_id"
 
   create_table "investors", force: true do |t|
     t.string   "first_name"
@@ -73,6 +76,7 @@ ActiveRecord::Schema.define(version: 20141208170534) do
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "role"
   end
 
 end

@@ -2,35 +2,46 @@
 
 <table>
   <thead>
-    <tr>
-      <th>Term</th>
-      <th>Interest rate</th>
-      <th>Minimum order</th>
-      <th>Denomination</th>
-      <th>Maturity date</th>
-      <th>Issue date</th>
-      <th>Offer start period</th>
-      <th>Offer end period</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th>Term</th>
+    <th>Interest rate</th>
+    <th>Minimum order</th>
+    <th>Denomination</th>
+    <th>Maturity date</th>
+    <th>Issue date</th>
+    <th>Offer start period</th>
+    <th>Offer end period</th>
+    <th colspan="3"></th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @investments.each do |investment| %>
-      <tr>
-        <td><%= investment.term %></td>
-        <td><%= investment.interest_rate %></td>
-        <td><%= investment.minimum_order %></td>
-        <td><%= investment.denomination %></td>
-        <td><%= investment.maturity_date %></td>
-        <td><%= investment.issue_date %></td>
-        <td><%= investment.offer_start_period %></td>
-        <td><%= investment.offer_end_period %></td>
-        <td><%= link_to 'Show', investment %></td>
+  <% @investments.each do |investment| %>
+    <tr id='<%= dom_id(investment) %>'>
+      <td><%= investment.term %></td>
+      <td><%= investment.interest_rate %></td>
+      <td><%= investment.minimum_order %></td>
+      <td><%= investment.denomination %></td>
+      <td><%= investment.maturity_date %></td>
+      <td><%= investment.issue_date %></td>
+      <td><%= investment.offer_start_period %></td>
+      <td><%= investment.offer_end_period %></td>
+      <td><%= link_to 'Show', investment %></td>
+      <% if current_user %>
         <td><%= link_to 'Edit', edit_investment_path(investment) %></td>
-        <td><%= link_to 'Destroy', investment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+        <td>
+          <% if current_user.investments.include?(investment) %>
+            <%= link_to 'Divest', divest_investment_path(investment) %></td>
+          <% else %>
+            <%= link_to 'Invest', invest_investment_path(investment) %></td>
+          <% end %>
+      <% end %>
+      <%# if can? :update, @investment %>
+      <td><%= link_to 'Destroy', investment, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+      <%# end %>
+
+    </tr>
+  <% end %>
   </tbody>
 </table>
 
