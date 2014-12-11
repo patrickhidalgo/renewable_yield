@@ -1,9 +1,9 @@
 # require 'rails_helper'
 #
-# RSpec.describe "Providers", :type => :request do
-#   describe "GET /providers" do
+# RSpec.describe "Projects", :type => :request do
+#   describe "GET /projects" do
 #     it "works! (now write some real specs)" do
-#       get providers_path
+#       get projects_path
 #       expect(response).to have_http_status(200)
 #     end
 #   end

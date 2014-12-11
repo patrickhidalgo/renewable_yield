@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   has_secure_password
   has_many :investments
-  # has_many :projects
+  has_many :projects
+
   validate :password, presence: true
   #
   # ROLES = %w[admin manager investor provider]

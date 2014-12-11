@@ -79,14 +79,6 @@ feature 'Investment Management' do
     # save_and_open_page
     expect(page).to have_content('Investment was successfully destroyed.')
 
-    # expect(page).to_not have_text(investment.term)
-    # expect(page).to_not have_text(investment.interest_rate)
-    # expect(page).to_not have_text(investment.minimum_order)
-    # expect(page).to_not have_text(investment.denomination)
-    # expect(page).to_not have_text(investment.maturity_date)
-    # expect(page).to_not have_text(investment.issue_date)
-    # expect(page).to_not have_text(investment.offer_start_period)
-    # expect(page).to_not have_text(investment.offer_end_period)
 
   end
 end

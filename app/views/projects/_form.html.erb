@@ -1,0 +1,109 @@
+<%= form_for(@project) do |f| %>
+  <% if @project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+      <% @project.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :format %><br>
+    <%= f.text_field :format %>
+  </div>
+  <div class="field">
+    <%= f.label :api_key %><br>
+    <%= f.text_field :api_key %>
+  </div>
+  <div class="field">
+    <%= f.label :system_capacity %><br>
+    <%= f.text_field :system_capacity %>
+  </div>
+  <div class="field">
+    <%= f.label :module_type %><br>
+    <%= f.number_field :module_type %>
+  </div>
+  <div class="field">
+    <%= f.label :losses %><br>
+    <%= f.text_field :losses %>
+  </div>
+  <div class="field">
+    <%= f.label :array_type %><br>
+    <%= f.number_field :array_type %>
+  </div>
+  <div class="field">
+    <%= f.label :tilt %><br>
+    <%= f.text_field :tilt %>
+  </div>
+  <div class="field">
+    <%= f.label :azimuth %><br>
+    <%= f.text_field :azimuth %>
+  </div>
+  <div class="field">
+    <%= f.label :address %><br>
+    <%= f.text_field :address %>
+  </div>
+  <div class="field">
+    <%= f.label :lat %><br>
+    <%= f.text_field :lat %>
+  </div>
+  <div class="field">
+    <%= f.label :lon %><br>
+    <%= f.text_field :lon %>
+  </div>
+  <div class="field">
+    <%= f.label :file_id %><br>
+    <%= f.text_field :file_id %>
+  </div>
+  <div class="field">
+    <%= f.label :dataset %><br>
+    <%= f.text_field :dataset %>
+  </div>
+  <div class="field">
+    <%= f.label :radius %><br>
+    <%= f.number_field :radius %>
+  </div>
+  <div class="field">
+    <%= f.label :timeframe %><br>
+    <%= f.text_field :timeframe %>
+  </div>
+  <div class="field">
+    <%= f.label :dc_ac_ratio %><br>
+    <%= f.text_field :dc_ac_ratio %>
+  </div>
+  <div class="field">
+    <%= f.label :gcr %><br>
+    <%= f.text_field :gcr %>
+  </div>
+  <div class="field">
+    <%= f.label :inv_eff %><br>
+    <%= f.text_field :inv_eff %>
+  </div>
+  <div class="field">
+    <%= f.label :callback %><br>
+    <%= f.text_field :callback %>
+  </div>
+  <div class="field">
+    <%= f.label :npv %><br>
+    <%= f.number_field :npv %>
+  </div>
+  <div class="field">
+    <%= f.label :irr %><br>
+    <%= f.text_field :irr %>
+  </div>
+  <div class="field">
+    <%= f.label :project_score %><br>
+    <%= f.number_field :project_score %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

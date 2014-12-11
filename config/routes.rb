@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
+  resources :projects
+
   resources :users,
     only: [:new, :create],
     path_names: { new: "signup"}
 
-  resources :providers
   get 'my_investments' => 'investments#my_investments'
 
   resources :investments do

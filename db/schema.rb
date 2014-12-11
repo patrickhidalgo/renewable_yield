@@ -11,7 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141210035627) do
+ActiveRecord::Schema.define(version: 20141210193944) do
+
+  create_table "formats", force: true do |t|
+    t.string   "api_key"
+    t.decimal  "system_capacity"
+    t.integer  "module_type"
+    t.decimal  "losses"
+    t.integer  "array_type"
+    t.decimal  "tilt"
+    t.decimal  "azimuth"
+    t.string   "address"
+    t.decimal  "lat"
+    t.decimal  "lon"
+    t.string   "file_id"
+    t.string   "dataset"
+    t.integer  "radius"
+    t.string   "timeframe"
+    t.decimal  "dc_ac_ratio"
+    t.decimal  "gcr"
+    t.decimal  "inv_eff"
+    t.string   "callback"
+    t.integer  "npv"
+    t.decimal  "irr"
+    t.integer  "project_score"
+    t.string   "status"
+    t.string   "AddUserRefToProjects"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "formats", ["user_id"], name: "index_formats_on_user_id"
 
   create_table "investments", force: true do |t|
     t.integer  "term"
@@ -44,6 +75,37 @@ ActiveRecord::Schema.define(version: 20141210035627) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "projects", force: true do |t|
+    t.string   "format"
+    t.string   "api_key"
+    t.decimal  "system_capacity"
+    t.integer  "module_type"
+    t.decimal  "losses"
+    t.integer  "array_type"
+    t.decimal  "tilt"
+    t.decimal  "azimuth"
+    t.string   "address"
+    t.decimal  "lat"
+    t.decimal  "lon"
+    t.string   "file_id"
+    t.string   "dataset"
+    t.integer  "radius"
+    t.string   "timeframe"
+    t.decimal  "dc_ac_ratio"
+    t.decimal  "gcr"
+    t.decimal  "inv_eff"
+    t.string   "callback"
+    t.integer  "npv"
+    t.decimal  "irr"
+    t.integer  "project_score"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "projects", ["user_id"], name: "index_projects_on_user_id"
 
   create_table "providers", force: true do |t|
     t.string   "company_name"
