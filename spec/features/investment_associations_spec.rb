@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Investments Associations' do
+feature 'Investment Associations' do
   scenario 'allow a logged in user to claim an investment' do
     @user = FactoryGirl.create(:user)
     @investment1 = FactoryGirl.create(:investment)

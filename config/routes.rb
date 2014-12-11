@@ -1,11 +1,17 @@
 Rails.application.routes.draw do
-  resources :projects
+  resources :projects do
+    member do
+      get 'submit' => 'projects#submit'
+      get 'withdraw' => 'projects#withdraw'
+    end
+  end
 
   resources :users,
     only: [:new, :create],
     path_names: { new: "signup"}
 
   get 'my_investments' => 'investments#my_investments'
+  get 'my_projects' => 'projects#my_projects'
 
   resources :investments do
     member do

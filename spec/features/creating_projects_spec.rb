@@ -144,8 +144,5 @@ feature 'Project Management' do
     expect(page).to_not have_text(project.address)
     expect(page).to_not have_text(project.lat.round(12))
     expect(page).to_not have_text(project.lon.round(12))
-    expect(page).to_not have_text(project.npv)
-    expect(page).to_not have_text(project.irr)
-    expect(page).to_not have_text(project.project_score)
   end
 end
