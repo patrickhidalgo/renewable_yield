@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141210193944) do
+ActiveRecord::Schema.define(version: 20141211062801) do
 
   create_table "formats", force: true do |t|
     t.string   "api_key"
@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(version: 20141210193944) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "role"
+    t.integer  "roles_mask"
   end
 
 end

@@ -8,11 +8,11 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-    @user || User.find(session[:id]) if session[:id]
+    @current_user || User.find(session[:id]) if session[:id]
   end
 
-  # rescue_from CanCan::AccessDenied do |exception|
-  #   redirect_to root_path, :alert => exception.message
-  #   end
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_path, :alert => exception.message
+    end
   # check_authorization
 end

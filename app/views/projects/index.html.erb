@@ -31,47 +31,58 @@
   </thead>
 
   <tbody>
-  <% @projects.each do |project| %>
-    <tr id='<%= dom_id(project) %>'>
-      <td><%= project.format %></td>
-      <td><%= project.api_key %></td>
-      <td><%= project.system_capacity %></td>
-      <td><%= project.module_type %></td>
-      <td><%= project.losses %></td>
-      <td><%= project.array_type %></td>
-      <td><%= project.tilt %></td>
-      <td><%= project.azimuth %></td>
-      <td><%= project.address %></td>
-      <td><%= project.lat %></td>
-      <td><%= project.lon %></td>
-      <td><%= project.file_id %></td>
-      <td><%= project.dataset %></td>
-      <td><%= project.radius %></td>
-      <td><%= project.timeframe %></td>
-      <td><%= project.dc_ac_ratio %></td>
-      <td><%= project.gcr %></td>
-      <td><%= project.inv_eff %></td>
-      <td><%= project.callback %></td>
-      <td><%= project.npv %></td>
-      <td><%= project.irr %></td>
-      <td><%= project.project_score %></td>
-      <td><%= project.status %></td>
-      <td><%= link_to 'Show', project %>
-        <% if current_user %>
+  <%= content_tag_for(:tr, @projects) do |project| %>
+
+    <%# @projects.each do |project| %>
+    <!--<tr id='<%# dom_id(project) %>'>-->
+    <td><%= project.format %></td>
+    <td><%= project.api_key %></td>
+    <td><%= project.system_capacity %></td>
+    <td><%= project.module_type %></td>
+    <td><%= project.losses %></td>
+    <td><%= project.array_type %></td>
+    <td><%= project.tilt %></td>
+    <td><%= project.azimuth %></td>
+    <td><%= project.address %></td>
+    <td><%= project.lat %></td>
+    <td><%= project.lon %></td>
+    <td><%= project.file_id %></td>
+    <td><%= project.dataset %></td>
+    <td><%= project.radius %></td>
+    <td><%= project.timeframe %></td>
+    <td><%= project.dc_ac_ratio %></td>
+    <td><%= project.gcr %></td>
+    <td><%= project.inv_eff %></td>
+    <td><%= project.callback %></td>
+    <td><%= project.npv %></td>
+    <td><%= project.irr %></td>
+    <td><%= project.project_score %></td>
+    <td><%= project.status %></td>
+    <td><%= link_to 'Show', project %>
+      <% if current_user %>
+        <% if can? :update, @project %>
         <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td>
-          <% if current_user.projects.include?(project) %>
-            <%= link_to 'Withdraw', withdraw_project_path(project) %></td>
-          <% else %>
-            <%= link_to 'Submit', submit_project_path(project) %></td>
-          <% end %>
       <% end %>
-        <td><%= link_to 'Destroy', project, method: :delete, data: {confirm: 'Are you sure?'} %></td>
-        </tr>
-      <% end %>
-      </tbody>
-      </table>
+      <td>
+        <% if current_user.projects.include?(project) %>
+          <%= link_to 'Withdraw', withdraw_project_path(project) %></td>
+        <% else %>
+          <%= link_to 'Submit', submit_project_path(project) %></td>
+        <% end %>
+    <% end %>
+    <% if can? :destroy, @project %>
+  <td><%= link_to 'Destroy', project, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+    <!--</tr>-->
+  <% end %>
+  <% end %>
+  </tbody>
+</table>
 
-      <br>
-
-      <%= link_to 'New Project', new_project_path %>
+<br>
+<% if can? :create, @project %>
+<%= link_to 'New Project', new_project_path %>
+<% end %>
+<br>
+<%= link_to 'Home', root_path %>
+<br>
+<%= link_to 'About', about_path %>

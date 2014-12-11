@@ -29,8 +29,7 @@ class CreateProjects < ActiveRecord::Migration
     end
   end
 end
-30.7296954443036
-176.812145110704
+
 
 
 

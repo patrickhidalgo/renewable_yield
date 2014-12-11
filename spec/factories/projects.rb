@@ -1,4 +1,3 @@
-require 'bigdecimal'
 
 FactoryGirl.define do
   factory :project do

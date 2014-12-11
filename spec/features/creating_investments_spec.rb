@@ -74,10 +74,10 @@ feature 'Investment Management' do
 
     visit investments_path
     within "#investment_#{investment.id}" do
-      click_link 'Destroy'
+      # click_link 'Destroy' - commented out because of associations
     end
-    # save_and_open_page
-    expect(page).to have_content('Investment was successfully destroyed.')
+
+    expect(page).to_not have_link('Destroy')
 
 
   end

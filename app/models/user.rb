@@ -4,16 +4,24 @@ class User < ActiveRecord::Base
   has_many :projects
 
   validate :password, presence: true
-  #
-  # ROLES = %w[admin manager investor provider]
-  #
-  # def role_symbols
-  #   [role.to_sym]
-  # end
-  #
-  # def role?(role)
-  #   roles.include? role.to_s
-  # end
+
+  ROLES = %w[admin manager investor provider]
+
+  def roles=(roles)
+    self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.sum
+  end
+
+  def roles
+    ROLES.reject { |r| ((roles_mask || 0) & 2**ROLES.index(r)).zero? }
+  end
+
+  def role_symbols
+    [role.to_sym]
+  end
+
+  def role?(role)
+    roles.include? role.to_s
+  end
 
   def self.seed_user!
     20.times do |number|
