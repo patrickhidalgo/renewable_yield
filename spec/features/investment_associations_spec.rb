@@ -2,7 +2,8 @@ require 'rails_helper'
 
 feature 'Investment Associations' do
   scenario 'allow a logged in user to claim an investment' do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryGirl.create(:user, role: 'admin')
+
     @investment1 = FactoryGirl.create(:investment)
     @investment2 = FactoryGirl.create(:investment)
 
@@ -10,6 +11,7 @@ feature 'Investment Associations' do
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: @user.password
     click_button 'Login'
+    save_and_open_page
 
     within("#investment_#{@investment1.id}") do
       click_link 'Invest'

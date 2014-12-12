@@ -13,5 +13,6 @@ FactoryGirl.define do
       ssn { Faker::Number.number(9) }
       password { Faker::Internet.password }
       password_confirmation { password }
+      role ['admin', 'manager', 'investor', 'provider'].sample
     end
   end

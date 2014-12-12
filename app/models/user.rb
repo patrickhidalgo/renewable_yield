@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_secure_password
   has_many :investments
   has_many :projects
+  # has_many :roles
 
   validate :password, presence: true
 
@@ -28,7 +29,7 @@ class User < ActiveRecord::Base
       @first_name = Faker::Name.first_name
       @password = Faker::Internet.password
 
-      User.create(
+      User.create!(
         :company_name => Faker::Company.name,
         :first_name => @first_name,
         :middle_name => Faker::Name.first_name,
@@ -41,7 +42,9 @@ class User < ActiveRecord::Base
         :email => Faker::Internet.free_email(@first_name),
         :ssn => Faker::Number.number(9),
         :password => @password,
-        :password_confirmation => @password
+        :password_confirmation => @password,
+        :role => 'investor'
+
       )
     end
   end

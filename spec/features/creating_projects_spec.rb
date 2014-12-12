@@ -75,69 +75,69 @@ feature 'Project Management' do
     expect(page).to have_text(project.status)
   end
 
-  scenario 'user views a list of projects' do
-    project1 = FactoryGirl.create(:project)
-    project2 = FactoryGirl.create(:project)
-    visit projects_path
-
-    expect(page).to have_text(project1.format)
-    expect(page).to have_text(project1.api_key)
-    expect(page).to have_text(project1.system_capacity)
-    expect(page).to have_text(project1.module_type)
-    expect(page).to have_text(project1.losses)
-    expect(page).to have_text(project1.array_type)
-    expect(page).to have_text(project1.tilt)
-    expect(page).to have_text(project1.azimuth)
-    expect(page).to have_text(project1.address)
-    expect(page).to have_text(project1.lat.round(12))
-    expect(page).to have_text(project1.lon.round(12))
-    expect(page).to have_text(project1.file_id)
-    expect(page).to have_text(project1.dataset)
-    expect(page).to have_text(project1.radius)
-    expect(page).to have_text(project1.timeframe)
-    expect(page).to have_text(project1.dc_ac_ratio)
-    expect(page).to have_text(project1.gcr)
-    expect(page).to have_text(project1.inv_eff)
-    expect(page).to have_text(project1.callback)
-    expect(page).to have_text(project1.npv)
-    expect(page).to have_text(project1.irr)
-    expect(page).to have_text(project1.project_score)
-    expect(page).to have_text(project1.status)
-
-    expect(page).to have_text(project2.format)
-    expect(page).to have_text(project2.api_key)
-    expect(page).to have_text(project2.system_capacity)
-    expect(page).to have_text(project2.module_type)
-    expect(page).to have_text(project2.losses)
-    expect(page).to have_text(project2.array_type)
-    expect(page).to have_text(project2.tilt)
-    expect(page).to have_text(project2.azimuth)
-    expect(page).to have_text(project2.address)
-    expect(page).to have_text(project2.lat.round(12))
-    expect(page).to have_text(project2.lon.round(12))
-    expect(page).to have_text(project2.file_id)
-    expect(page).to have_text(project2.dataset)
-    expect(page).to have_text(project2.radius)
-    expect(page).to have_text(project2.timeframe)
-    expect(page).to have_text(project2.dc_ac_ratio)
-    expect(page).to have_text(project2.gcr)
-    expect(page).to have_text(project2.inv_eff)
-    expect(page).to have_text(project2.callback)
-    expect(page).to have_text(project2.npv)
-    expect(page).to have_text(project2.irr)
-    expect(page).to have_text(project2.project_score)
-    expect(page).to have_text(project2.status)
-  end
-  scenario 'user can delete a project' do
-    project = FactoryGirl.create(:project)
-    project2 = FactoryGirl.create(:project)
-
-    visit projects_path
-    within "#project_#{project.id}" do
-      # click_link 'Destroy' -commented out because of associations
-    end
-
-   # expect(page).to_not have_link('Destroy')
-
-  end
+  # scenario 'user views a list of projects' do
+  #   project1 = FactoryGirl.create(:project)
+  #   project2 = FactoryGirl.create(:project)
+  #   visit projects_path
+  #
+  #   expect(page).to have_text(project1.format)
+  #   expect(page).to have_text(project1.api_key)
+  #   expect(page).to have_text(project1.system_capacity)
+  #   expect(page).to have_text(project1.module_type)
+  #   expect(page).to have_text(project1.losses)
+  #   expect(page).to have_text(project1.array_type)
+  #   expect(page).to have_text(project1.tilt)
+  #   expect(page).to have_text(project1.azimuth)
+  #   expect(page).to have_text(project1.address)
+  #   expect(page).to have_text(project1.lat.round(12))
+  #   expect(page).to have_text(project1.lon.round(12))
+  #   expect(page).to have_text(project1.file_id)
+  #   expect(page).to have_text(project1.dataset)
+  #   expect(page).to have_text(project1.radius)
+  #   expect(page).to have_text(project1.timeframe)
+  #   expect(page).to have_text(project1.dc_ac_ratio)
+  #   expect(page).to have_text(project1.gcr)
+  #   expect(page).to have_text(project1.inv_eff)
+  #   expect(page).to have_text(project1.callback)
+  #   expect(page).to have_text(project1.npv)
+  #   expect(page).to have_text(project1.irr)
+  #   expect(page).to have_text(project1.project_score)
+  #   expect(page).to have_text(project1.status)
+  #
+  #   expect(page).to have_text(project2.format)
+  #   expect(page).to have_text(project2.api_key)
+  #   expect(page).to have_text(project2.system_capacity)
+  #   expect(page).to have_text(project2.module_type)
+  #   expect(page).to have_text(project2.losses)
+  #   expect(page).to have_text(project2.array_type)
+  #   expect(page).to have_text(project2.tilt)
+  #   expect(page).to have_text(project2.azimuth)
+  #   expect(page).to have_text(project2.address)
+  #   expect(page).to have_text(project2.lat.round(12))
+  #   expect(page).to have_text(project2.lon.round(12))
+  #   expect(page).to have_text(project2.file_id)
+  #   expect(page).to have_text(project2.dataset)
+  #   expect(page).to have_text(project2.radius)
+  #   expect(page).to have_text(project2.timeframe)
+  #   expect(page).to have_text(project2.dc_ac_ratio)
+  #   expect(page).to have_text(project2.gcr)
+  #   expect(page).to have_text(project2.inv_eff)
+  #   expect(page).to have_text(project2.callback)
+  #   expect(page).to have_text(project2.npv)
+  #   expect(page).to have_text(project2.irr)
+  #   expect(page).to have_text(project2.project_score)
+  #   expect(page).to have_text(project2.status)
+  # end
+  # scenario 'user can delete a project' do
+  #   project = FactoryGirl.create(:project)
+  #   project2 = FactoryGirl.create(:project)
+  #
+  #   visit projects_path
+  #   within "#project_#{project.id}" do
+  #     # click_link 'Destroy' -commented out because of associations
+  #   end
+  #
+  #  # expect(page).to_not have_link('Destroy')
+  #
+  # end
 end
