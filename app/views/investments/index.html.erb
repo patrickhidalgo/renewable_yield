@@ -28,18 +28,20 @@
     <td><%= investment.offer_end_period %></td>
     <td><%= link_to 'Show', investment %></td>
     <% if current_user %>
-      <% if can? :update, @investment %>
+      <% if can? :update, investment %>
         <td><%= link_to 'Edit', edit_investment_path(investment) %></td>
       <% end %>
-      <td>
-        <% if current_user.investments.include?(investment) %>
-          <%= link_to 'Divest', divest_investment_path(investment) %></td>
-        <% else %>
-          <%= link_to 'Invest', invest_investment_path(investment) %></td>
-        <% end %>
-        <% if can? :destroy, @investment %>
-          <td><%= link_to 'Destroy', investment, method: :delete, data: {confirm: 'Are you sure?'} %></td>
-        <% end %>
+      <% if can? :has_money, investment %>
+        <td>
+          <% if current_user.investments.include?(investment) %>
+            <%= link_to 'Divest', divest_investment_path(investment) %></td>
+          <% else %>
+            <%= link_to 'Invest', invest_investment_path(investment) %></td>
+          <% end %>
+      <% end %>
+      <% if can? :destroy, investment %>
+        <td><%= link_to 'Destroy', investment, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+      <% end %>
     <% end %>
   <% end %>
   <!--</tr>-->

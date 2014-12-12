@@ -60,28 +60,31 @@
     <td><%= project.status %></td>
     <td><%= link_to 'Show', project %>
       <% if current_user %>
-        <% if can? :update, @project %>
+        <% if can? :update, project %>
         <td><%= link_to 'Edit', edit_project_path(project) %></td>
       <% end %>
-      <td>
-        <% if current_user.projects.include?(project) %>
-          <%= link_to 'Withdraw', withdraw_project_path(project) %></td>
-        <% else %>
-          <%= link_to 'Submit', submit_project_path(project) %></td>
-        <% end %>
+      <% if can? :needs_money, project %>
+        <td>
+          <% if current_user.projects.include?(project) %>
+            <%= link_to 'Withdraw', withdraw_project_path(project) %></td>
+          <% else %>
+            <%= link_to 'Submit', submit_project_path(project) %></td>
+          <% end %>
+      <% end %>
+      <% if can? :destroy, project %>
+        <td><%= link_to 'Destroy', project, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        <!--</tr>-->
+      <% end %>
+      <% if can? :create, project %>
+        <%= link_to 'New Project', new_project_path %>
+      <% end %>
     <% end %>
-    <% if can? :destroy, @project %>
-  <td><%= link_to 'Destroy', project, method: :delete, data: {confirm: 'Are you sure?'} %></td>
-    <!--</tr>-->
-  <% end %>
   <% end %>
   </tbody>
 </table>
 
 <br>
-<% if can? :create, @project %>
-<%= link_to 'New Project', new_project_path %>
-<% end %>
+
 <br>
 <%= link_to 'Home', root_path %>
 <br>

@@ -1,7 +1,13 @@
 <% if current_user %>
-<%= link_to 'My Investments', my_investments_path %>
-<%# link_to 'My Projects', my_products_path %>
-Signed in as <%= current_user.email %>
+  <% if current_user.investor? || current_user.admin? || current_user.manager? %>
+    <%= link_to 'My Investments', my_investments_path %>
+    <%= link_to 'Investments', investments_path %>
+  <% end %>
+  <% if current_user.provider? || current_user.admin? || current_user.manager? %>
+    <%= link_to 'My Projects', my_projects_path %>
+    <%= link_to 'Projects', projects_path %>
+  <% end %>
+Signed in as <%= current_user.email %> whose role is <%= current_user.role %>
 <%= link_to 'Logout', logout_path, method: :delete %>
 <% else %>
 <%= link_to 'Signup', new_user_path %>

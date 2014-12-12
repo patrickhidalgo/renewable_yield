@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_project, only: [:show, :edit, :update, :destroy, :submit, :withdraw]
 
   def submit
@@ -11,7 +12,7 @@ class ProjectsController < ApplicationController
   def withdraw
     @project.user = nil
     @project.save
-    redirect_to projects_path, notice: "#{@project.term} #{@project.interest_rate} has been sold!."
+    redirect_to my_projects_path, notice: "#{@project.term} #{@project.interest_rate} has been sold!."
   end
 
   def index

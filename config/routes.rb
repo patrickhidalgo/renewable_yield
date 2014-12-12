@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
+  get 'business_canvas' => 'about#business_canvas'
+  get 'team' => 'about#team'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

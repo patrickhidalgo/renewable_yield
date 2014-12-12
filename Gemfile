@@ -11,6 +11,7 @@ gem 'jquery-ui-rails'
 gem 'cancan'
 
 group :test, :darwin, :development do
+  gem 'byebug'
   gem 'ruby_gntp'
   gem 'faker'
 end

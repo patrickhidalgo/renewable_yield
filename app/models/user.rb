@@ -4,32 +4,33 @@ class User < ActiveRecord::Base
   has_many :projects
   # has_many :roles
 
-  validate :password, presence: true
+  # validates :password, presence: true
 
   ROLES = %w[admin manager investor provider]
+  validates :role, inclusion: { in: ROLES}
 
-  def roles=(roles)
-    self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.sum
+  def admin?
+    self.role == ROLES[0]
   end
 
-  def roles
-    ROLES.reject { |r| ((roles_mask || 0) & 2**ROLES.index(r)).zero? }
+  def manager?
+    self.role == ROLES[1]
   end
 
-  def role_symbols
-    [role.to_sym]
+  def investor?
+    self.role == ROLES[2]
   end
 
-  def role?(role)
-    roles.include? role.to_s
+  def provider?
+    self.role == ROLES[3]
   end
 
-  def self.seed_user!
+  def self.seed_data!
     20.times do |number|
       @first_name = Faker::Name.first_name
       @password = Faker::Internet.password
 
-      User.create!(
+      user = User.create!(
         :company_name => Faker::Company.name,
         :first_name => @first_name,
         :middle_name => Faker::Name.first_name,
@@ -43,8 +44,7 @@ class User < ActiveRecord::Base
         :ssn => Faker::Number.number(9),
         :password => @password,
         :password_confirmation => @password,
-        :role => 'investor'
-
+        :role => %w[investor provider].sample
       )
     end
   end

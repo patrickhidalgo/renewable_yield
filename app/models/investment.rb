@@ -6,7 +6,7 @@ class Investment < ActiveRecord::Base
 
   belongs_to :user
 
-  def self.seed_investment!
+  def self.seed_data!
     7.times do |number|
       @interest_rate = 1.50 + (0.50 * number)
       @maturity_date = number.years.from_now

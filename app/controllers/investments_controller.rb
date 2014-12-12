@@ -12,7 +12,7 @@ class InvestmentsController < ApplicationController
   def divest
     @investment.user = nil
     @investment.save
-      redirect_to investments_path, notice: "#{@investment.term} #{@investment.interest_rate} has been sold!."
+      redirect_to my_investments_path, notice: "#{@investment.term} #{@investment.interest_rate} has been sold!."
     end
 
   def index
