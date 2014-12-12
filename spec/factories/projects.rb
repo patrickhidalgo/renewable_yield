@@ -14,7 +14,7 @@ FactoryGirl.define do
             #{Faker::Address.zip}"}
     lat { Faker::Address.latitude.to_f.round(12) }
     lon { Faker::Address.longitude.to_f.round(12) }
-    file_id 0-94018
+    file_id 94018
     dataset ['tmy2', 'tmy3', 'intl'].sample
     radius 100
     timeframe ['hourly', 'monthly'].sample

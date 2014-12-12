@@ -1,44 +1,45 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Term:</strong>
-  <%= @investment.term %>
+  <strong>RENYD <%= @investment.issue_date.strftime('%Y') %>-1/
+    <%= @investment.term %> are unsecured bonds issued by Renewable
+    Yield. The bonds have a <%= @investment.term %> year term with
+    a <%= number_to_percentage(@investment.interest_rate, precision: 2) %>
+    interest rate. The bonds will mature on
+    <%= @investment.maturity_date.strftime('%B %-d, %Y') %> which is
+    <%= @investment.term %> years after their offer date of
+    <%= @investment.issue_date.strftime('%B %-d, %Y') %>.
+  </strong>
 </p>
 
 <p>
-  <strong>Interest rate:</strong>
-  <%= @investment.interest_rate %>
+  <strong>The minimum order is <%= number_to_currency(@investment.minimum_order, precision: 2) %> and
+    increments are <%= number_to_currency(@investment.denomination, precision: 2) %>.
+  </strong>
 </p>
 
 <p>
-  <strong>Minimum order:</strong>
-  <%= @investment.minimum_order %>
+  <strong>The offering period for this bond started on
+    <%= @investment.offer_start_period.strftime('%B %-d, %Y') %> and will end on
+    <%= @investment.offer_end_period.strftime('%B %-d, %Y') %>.
+  </strong>
 </p>
 
-<p>
-  <strong>Denomination:</strong>
-  <%= @investment.denomination %>
-</p>
+<%= content_tag_for(:tr, @investments) do |investment| %>
+  <% if current_user %>
+    <% if can? :update, investment %>
+      <%= link_to 'Edit', edit_investment_path(investment) %>
+    <% end %>
+    <% if can? :has_money, investment %>
+      <% if current_user.investments.include?(investment) %>
+        <%= link_to 'Back', my_investments_path %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
 
-<p>
-  <strong>Maturity date:</strong>
-  <%= @investment.maturity_date %>
-</p>
-
-<p>
-  <strong>Issue date:</strong>
-  <%= @investment.issue_date %>
-</p>
-
-<p>
-  <strong>Offer start period:</strong>
-  <%= @investment.offer_start_period %>
-</p>
-
-<p>
-  <strong>Offer end period:</strong>
-  <%= @investment.offer_end_period %>
-</p>
-
-<%= link_to 'Edit', edit_investment_path(@investment) %> |
 <%= link_to 'Back', investments_path %>
+<br>
+<%= link_to 'Home', root_path %>
+<br>
+<%= link_to 'About', about_path %>
