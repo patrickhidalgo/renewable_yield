@@ -20,7 +20,7 @@ class ProjectsController < ApplicationController
   end
 
   def my_projects
-    @projects = project.where(user_id: current_user.id).paginate(page: params[:page], per_page: 20)
+    @projects = Project.where(user_id: current_user.id).paginate(page: params[:page], per_page: 20)
     render 'projects/index'
   end
 

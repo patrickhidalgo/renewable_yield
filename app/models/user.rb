@@ -29,6 +29,11 @@ class User < ActiveRecord::Base
     20.times do |number|
       @first_name = Faker::Name.first_name
       @password = Faker::Internet.password
+      if number >= 10
+        @role = 'provider'
+      else
+        @role = 'investor'
+      end
 
       user = User.create!(
         :company_name => Faker::Company.name,
@@ -44,7 +49,7 @@ class User < ActiveRecord::Base
         :ssn => Faker::Number.number(9),
         :password => @password,
         :password_confirmation => @password,
-        :role => %w[investor provider].sample
+        :role => @role
       )
     end
   end
