@@ -6,6 +6,10 @@ class Investment < ActiveRecord::Base
 
   belongs_to :user
 
+  def self.per_page
+    10
+  end
+
   def self.seed_data!
     7.times do |number|
       @interest_rate = 1.50 + (0.50 * number)

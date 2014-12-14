@@ -1,10 +1,11 @@
 <br>
 <h1>GET FUNDED!</h1>
-<%= image_tag("solar_panels.jpg", size: "618x343",:alt => "rss feed") %>
+<%= image_tag("solar_panels.jpg", size: "618x343", :alt => "rss feed") %>
 
 
 <% if current_user.provider? || current_user.admin? || current_user.manager? %>
-
+  <h2> <%= link_to 'New Project', new_project_path %> </h2>
+  <!--<%# will_paginate @projects %>-->
   <table>
     <thead>
     <tr>
@@ -63,44 +64,40 @@
       <td><%= number_to_percentage(project.irr, precision: 2) %></td>
       <td><%= project.project_score %></td>
       <td><%= project.status %></td>
-      <td><%= link_to 'Show', project %>
-        <% if current_user %>
-          <% if can? :update, project %>
-          <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <% end %>
+      <% if current_user %>
         <% if can? :needs_money, project %>
           <td>
             <% if current_user.projects.include?(project) %>
-              <%= link_to 'Withdraw', withdraw_project_path(project) %></td>
+              <!--<%# link_to 'Withdraw', withdraw_project_path(project) %>-->
+              <%= link_to 'Show', project %>
+              <%= link_to 'Edit', edit_project_path(project) %>
+              <% if project.status == 'Not Funded' || current_user.admin? || current_user.manager? %>
+                <%= link_to 'Destroy', project, method: :delete, data: {confirm: 'Are you sure?'} %>
+              <% end %>
+              <%# link_to 'Submit', submit_project_path(project) %>
+              </td>
             <% else %>
-              <%= link_to 'Submit', submit_project_path(project) %></td>
             <% end %>
-        <% end %>
-        <% if can? :destroy, project %>
-          <td><%= link_to 'Destroy', project, method: :delete, data: {confirm: 'Are you sure?'} %></td>
-          <!--</tr>-->
-        <% end %>
-        <% if can? :create, project %>
-          <%= link_to 'New Project', new_project_path %>
         <% end %>
       <% end %>
     <% end %>
     </tbody>
   </table>
+  <%= will_paginate @projects %>
   <br>
 <% else %>
   <h3>Renewable Yield is proud to finance solar projects for small
-    residential solar providers.  If you fall into this category,
+    residential solar providers. If you fall into this category,
     please sign up as a provider and submit as many projects as you
-    need.  The more detail you can provide, the more accurately we
-    can analyze your proposal.  </h3>
+    need. The more detail you can provide, the more accurately we
+    can analyze your proposal. </h3>
   <h3>Once submitted, we run it through NREL's
     PV Watts model to calculate potential energy generation, gather the
     applicable tax incentives from the DSIRE database, run our own
-    numbers and give the project a score.  The higher the score, the better
+    numbers and give the project a score. The higher the score, the better
     chance of that project getting funded.
-  You will be able to see what you have submitted, which, if any,
-    of your project have been funded and which have not.  You will not
+    You will be able to see what you have submitted, which, if any,
+    of your project have been funded and which have not. You will not
     have access to other provider's projects.</h3>
 <% end %>
 <br>

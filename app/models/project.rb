@@ -1,6 +1,10 @@
 class Project < ActiveRecord::Base
   belongs_to :user
 
+  def self.per_page
+    5
+  end
+
   def self.seed_data!
     20.times do |number|
       @user_id = 11 + (number/10)

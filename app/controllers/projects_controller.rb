@@ -2,21 +2,21 @@ class ProjectsController < ApplicationController
   load_and_authorize_resource
   before_action :set_project, only: [:show, :edit, :update, :destroy, :submit, :withdraw]
 
-  def submit
-    if current_user
-      current_user.projects << @project
-      redirect_to projects_path, notice: "#{@project.term} #{@project.interest_rate} has been moved to your inventory."
-    end
-  end
+  # def submit
+  #   if current_user
+  #     current_user.projects << @project
+  #     redirect_to projects_path, notice: "#{@project.term} #{@project.interest_rate} has been moved to your inventory."
+  #   end
+  # end
 
-  def withdraw
-    @project.user = nil
-    @project.save
-    redirect_to my_projects_path, notice: "#{@project.term} #{@project.interest_rate} has been sold!."
-  end
+  # def withdraw
+  #   @project.user = nil
+  #   @project.save
+  #   redirect_to my_projects_path, notice: "#{@project.term} #{@project.interest_rate} has been sold!."
+  # end
 
   def index
-    @projects = Project.all
+    @projects = Project.all.paginate(page: params[:page])
   end
 
   def my_projects
@@ -71,6 +71,8 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
