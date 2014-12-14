@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   # validates :password, presence: true
 
-  ROLES = %w[admin manager investor provider]
+  ROLES = %w[admin manager investor provider] #
   validates :role, inclusion: { in: ROLES}
 
   def admin?
