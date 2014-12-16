@@ -1,5 +1,12 @@
 class Project < ActiveRecord::Base
+  # request = open('http://developer.nrel.gov/api/pvwatts/v5.json?api_key=mOwXKaie0UZB8tihBfZj5b2YpYkETjc33Yl5J1EM&lat=40&lon=-105&system_capacity=4&azimuth=180&tilt=40&array_type=1&module_type=1&losses=10')
   belongs_to :user
+  # has_one :nrel_data
+
+  # app/models/nrel_data.rb
+  # class NrelData < AR::Base
+  #   belongs_to :user
+  # end
 
   def self.per_page
     5

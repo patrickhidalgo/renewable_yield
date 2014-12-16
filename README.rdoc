@@ -20,4 +20,10 @@ Usage:
   bundle
   rails s
 
-  Visit renewable yield at http://localhost:3000/
+Note:
+
+  This app uses MailCatcher.  To install it, do the following:
+
+  gem install mailcatcher
+  mailcatcher
+  Visit Renewable Yield at http://localhost:3000/

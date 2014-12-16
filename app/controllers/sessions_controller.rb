@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
   def login
-
   end
 
   def create
@@ -18,7 +17,8 @@ class SessionsController < ApplicationController
 
   def destroy
     if user = current_user
-      session[:id] = nil
+      # session[:id] = nil
+      session.delete(:id)
       redirect_to root_path, notice: "#{user.email} has been logged out."
     end
   end

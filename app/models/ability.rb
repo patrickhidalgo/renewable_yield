@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    user || User.new #guest user
+    user ||= User.new #guest user
     alias_action :invest, :divest, :my_investments, :to => :has_money
     alias_action :submit, :withdraw, :my_projects, :to => :needs_money
 
@@ -17,14 +17,13 @@ class Ability
       can [:show], [Investment]
     else
       can :read, :all
-    end
+      can :read, Investment do |investment|
+        investment.try(:user) == user
+      end
 
-    can :read, Investment do |investment|
-      investment.try(:user) == user
-    end
-
-    can :read, Project do |project|
-      project.try(:user) == user
+      can :read, Project do |project|
+        project.try(:user) == user
+      end
     end
   end
 end

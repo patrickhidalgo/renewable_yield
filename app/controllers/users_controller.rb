@@ -20,6 +20,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        @user.needs_verification!
         session[:id] = @user.id
         format.html { redirect_to root_path, notice: "Thank you for signing up #{@user.first_name.titlecase}." }
         format.json { render :show, status: :created, location: @user }

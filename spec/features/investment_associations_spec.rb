@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 feature 'Investment Associations' do
-  scenario 'allow a logged in user to claim an investment' do
-    @user = FactoryGirl.create(:user, role: 'admin')
+  scenario 'allow a logged in investor to claim an investment' do
+    @user = FactoryGirl.create(:user, role: 'investor')
 
     @investment1 = FactoryGirl.create(:investment)
     @investment2 = FactoryGirl.create(:investment)
@@ -11,7 +11,8 @@ feature 'Investment Associations' do
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: @user.password
     click_button 'Login'
-    save_and_open_page
+
+    visit investments_path
 
     within("#investment_#{@investment1.id}") do
       click_link 'Invest'
@@ -28,8 +29,8 @@ feature 'Investment Associations' do
     expect(page).to_not have_selector("#investment_#{@investment2.id}")
   end
 
-  scenario 'allow a logged in user to un-claim an investment' do
-    @user = FactoryGirl.create(:user)
+  scenario 'allow a logged in investor to un-claim an investment' do
+    @user = FactoryGirl.create(:user, role: 'investor')
     @investment1 = FactoryGirl.create(:investment)
     @user.investments << @investment1
     @investment2 = FactoryGirl.create(:investment)
@@ -38,6 +39,8 @@ feature 'Investment Associations' do
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: @user.password
     click_button 'Login'
+
+    visit investments_path
 
     expect(page).to_not have_selector("#investment_#{@investment1.id}")
     expect(page).to have_selector("#investment_#{@investment2.id}")
@@ -52,13 +55,14 @@ feature 'Investment Associations' do
       click_link 'Divest'
     end
 
-    expect(page).to have_selector("#investment_#{@investment1.id}")
-    expect(page).to have_selector("#investment_#{@investment2.id}")
+    expect(page).to_not have_selector("#investment_#{@investment1.id}")
+    expect(page).to_not have_selector("#investment_#{@investment2.id}")
     expect(page).to have_text("#{@investment1.term} #{@investment1.interest_rate} has been sold!")
 
     click_link 'My Investments'
 
     expect(page).to_not have_selector("#investment_#{@investment1.id}")
+    expect(page).to_not have_selector("#investment_#{@investment2.id}")
 
   end
 end

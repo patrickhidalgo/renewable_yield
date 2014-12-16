@@ -8,12 +8,13 @@ gem 'factory_girl_rails'
 gem 'will_paginate', '~>3'
 gem 'guard'
 gem 'jquery-ui-rails'
-gem 'cancan'
+gem 'cancancan'
 
 group :test, :darwin, :development do
   gem 'byebug'
   gem 'ruby_gntp'
   gem 'faker'
+  gem 'rspec-collection_matchers'
 end
 
 group :test do

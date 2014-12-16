@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141210193944) do
+ActiveRecord::Schema.define(version: 20141214223144) do
 
   create_table "investments", force: true do |t|
     t.integer  "term"
@@ -76,6 +76,8 @@ ActiveRecord::Schema.define(version: 20141210193944) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "role"
+    t.boolean  "verified_email",  default: false
+    t.string   "token",           default: ""
   end
 
 end

@@ -25,6 +25,14 @@ class User < ActiveRecord::Base
     self.role == ROLES[3]
   end
 
+  def needs_verification!
+    update_attributes!(
+      token: SecureRandom.urlsafe_base64,
+      verified_email: false
+    )
+    UserNotifier.signed_up(self).deliver
+  end
+
   def self.seed_data!
     20.times do |number|
       @first_name = Faker::Name.first_name

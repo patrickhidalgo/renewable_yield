@@ -2,6 +2,7 @@ require 'rails_helper'
 
 feature 'User Authentication' do
   scenario 'allows an user to sign up' do
+    ActionMailer::Base.deliveries.clear
     visit '/'
     expect(page).to have_link('Signup')
 
@@ -24,6 +25,7 @@ feature 'User Authentication' do
 
     expect(page).to have_text('Thank you for signing up Bob')
     expect(page).to have_text('Signed in as bob@smith.com')
+    expect(ActionMailer::Base.deliveries).to have(1).email
   end
 
   scenario 'allows existing Users to login' do

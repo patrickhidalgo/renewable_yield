@@ -21,3 +21,10 @@
 
 en:
   hello: "Hello world"
+  user_notifier:
+    signed_up:
+      subject: "Please verify your e-mail address"
+    verified:
+      subject: "Thank you for verifying your e-mail address"
+    verify:
+      subject: "Please verify your e-mail address"

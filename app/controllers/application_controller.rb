@@ -8,11 +8,15 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-    @current_user || User.find(session[:id]) if session[:id]
+    @current_user = if session[:id]
+                      User.find(session[:id])
+                    else
+                      User.new
+                    end
   end
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to :back, :alert => exception.message
-    end
+  end
   # check_authorization
 end

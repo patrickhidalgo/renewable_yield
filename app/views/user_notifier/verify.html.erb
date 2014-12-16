@@ -1,0 +1,20 @@
+<h1>UserNotifier#verify</h1>
+
+<p>
+<h5>Hello <%= @user.first_name.titleize %>,</h5>
+
+<h5>You recently updated your <%= t('site_name') %> account's
+  email address to <%= @user.email %>.</h5>
+
+<h5>To verify your email address, please open the following link:</h5>
+
+<h5><%= verify_email_url(@user.token) %></h5>
+
+<h5>If the link does not work, please login to your account
+  and enter this token:</h5>
+
+<h5><%= @user.token %></h5>
+
+<h5>Thank you for visiting <%= t('site_name') %>.</h5>
+
+</p>

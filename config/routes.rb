@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  default_url_options host: 'localhost', port: 3000
+
+
   resources :projects do
     member do
       get 'submit' => 'projects#submit'
@@ -12,6 +15,7 @@ Rails.application.routes.draw do
 
   get 'my_investments' => 'investments#my_investments'
   get 'my_projects' => 'projects#my_projects'
+  get 'verification/:token', to: 'users#verify', as: 'verify_email'
 
   resources :investments do
     member do

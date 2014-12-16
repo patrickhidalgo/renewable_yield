@@ -2,9 +2,11 @@
 <h1>GET FUNDED!</h1>
 <%= image_tag("solar_panels.jpg", size: "618x343", :alt => "rss feed") %>
 
+<h2>We have funded <%= Project.where("Status = 'Funded'").count %>
+  projects for a total of <%= number_to_currency(Project.where("Status = 'Funded'").count * 20_000) %> to date.</h2>
 
-<% if current_user.provider? || current_user.admin? || current_user.manager? %>
-  <h2> <%= link_to 'New Project', new_project_path %> </h2>
+   <% if current_user.provider? || current_user.admin? || current_user.manager? %>
+  <h2> If you want to submit a project click here => <%= link_to 'New Project', new_project_path %> </h2>
   <!--<%# will_paginate @projects %>-->
   <table>
     <thead>
@@ -86,19 +88,7 @@
   <%= will_paginate @projects %>
   <br>
 <% else %>
-  <h3>Renewable Yield is proud to finance solar projects for small
-    residential solar providers. If you fall into this category,
-    please sign up as a provider and submit as many projects as you
-    need. The more detail you can provide, the more accurately we
-    can analyze your proposal. </h3>
-  <h3>Once submitted, we run it through NREL's
-    PV Watts model to calculate potential energy generation, gather the
-    applicable tax incentives from the DSIRE database, run our own
-    numbers and give the project a score. The higher the score, the better
-    chance of that project getting funded.
-    You will be able to see what you have submitted, which, if any,
-    of your project have been funded and which have not. You will not
-    have access to other provider's projects.</h3>
+  <%= render 'non_provider' %>
 <% end %>
 <br>
 <%= link_to 'Home', root_path %>

@@ -36,7 +36,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
-
+    #@project.nrel_data.build
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: "#{@project.system_capacity} Kw project was successfully created." }
@@ -65,9 +65,10 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
+    destroy_message = "#{@project.system_capacity} Kw project has been destroyed!"
     @project.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
+      format.html { redirect_to projects_url, notice: destroy_message }
       format.json { head :no_content }
     end
   end
@@ -82,6 +83,8 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:format, :api_key, :system_capacity, :module_type, :losses, :array_type, :tilt, :azimuth, :address, :lat, :lon, :file_id, :dataset, :radius, :timeframe, :dc_ac_ratio, :gcr, :inv_eff, :callback, :npv, :irr, :project_score, :status)
+      params.require(:project).permit(
+        :system_capacity, :module_type, :losses, :array_type,
+        :tilt, :azimuth, :address, :lat, :lon)  #:format, :api_key,, :file_id, :dataset, :radius, :timeframe, :dc_ac_ratio, :gcr, :inv_eff, :callback, :npv, :irr, :project_score, :status
     end
 end
