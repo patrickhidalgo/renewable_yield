@@ -6,7 +6,66 @@ class I took in the Spring of 2014.
 
 Features:
 
-  TBD
+Guest User Associations
+  guest user cannot create, edit or destroy an investment
+  guest user can view a list of investments
+  guest user cannot create, edit or destroy a project
+  guest user cannot view a list of projects
+
+Landing on homepage
+  should display landing data
+
+Investment Associations
+  allow a logged in investor to claim an investment
+  allow a logged in investor to un-claim an investment
+  does not allow a logged in investor to create an investment
+  allow a logged in investor to view a list of projects
+  allows a logged in admin to create an investment
+  allows a logged in admin to destroy an investment
+
+Project Associations
+  allow a logged in provider to create a project
+  allow a logged in provider to destroy their non-funded project
+  does not allow a logged in provider to destroy their funded project
+  allow a logged in provider to edit their non-funded project
+  does not allow a logged in provider to edit their funded project
+  allow a logged in provider to view a list of investments
+
+User Authentication
+  allows an user to sign up
+  allows existing Users to login
+  does not allow existing Users to login with an invalid password
+  allows a logged on User to logout
+
+UserNotifier
+  signed_up
+    renders the headers
+    renders the body
+  verified
+    renders the headers
+    renders the body
+  verify
+    renders the headers
+    renders the body
+
+Investment
+  should only allow numbers for minimum_order which are greater than 999.99
+  should belong to user
+
+Project
+  should belong to user
+
+User
+  should have a secure password
+  should require password to be set
+  should have many investments
+  should have many projects
+  should have db column named verified_email of null true
+  should have db column named token of null true
+  #needs_verification!
+    sets the verified email address field as false
+    sets the token for the user
+    sends a verification email
 
 Requirements:
     Ruby 2.1.4

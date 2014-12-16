@@ -17,7 +17,7 @@ feature 'Project Associations' do
     fill_in 'Array type', with: '1'
     fill_in 'Tilt', with: '10'
     fill_in 'Azimuth', with: '200'
-    fill_in 'Address', with: '5906 West Roxbury Place, Littleton, CO  80128'
+    fill_in 'Address', with: '5906 West Paddy Place, Springfield, CO  80202'
     fill_in 'Lat', with: '40'
     fill_in 'Lon', with: '50'
     click_button 'Create Project'
