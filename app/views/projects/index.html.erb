@@ -67,13 +67,13 @@
       <td><%= project.project_score %></td>
       <td><%= project.status %></td>
       <% if current_user %>
-        <% if can? :needs_money, project %>
+        <% if can? :manage, project %>
           <td>
-            <% if current_user.projects.include?(project) %>
+            <% if current_user.projects.include?(project) || current_user.admin?%>
               <!--<%# link_to 'Withdraw', withdraw_project_path(project) %>-->
               <%= link_to 'Show', project %>
-              <%= link_to 'Edit', edit_project_path(project) %>
               <% if project.status == 'Not Funded' || current_user.admin? || current_user.manager? %>
+                <%= link_to 'Edit', edit_project_path(project) %>
                 <%= link_to 'Destroy', project, method: :delete, data: {confirm: 'Are you sure?'} %>
               <% end %>
               <%# link_to 'Submit', submit_project_path(project) %>

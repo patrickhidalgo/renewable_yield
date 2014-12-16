@@ -67,7 +67,7 @@ class InvestmentsController < ApplicationController
   # DELETE /investments/1
   # DELETE /investments/1.json
   def destroy
-    destroy_message = 'Investment was successfully destroyed.'
+    destroy_message = "#{@investment.term} year #{@investment.interest_rate} was successfully destroyed."
 
     @investment.destroy
     respond_to do |format|

@@ -12,6 +12,7 @@ class Ability
       can [:manage, :all], [Investment, Project]
     elsif user.investor?
       can [:read, :has_money], [Investment]
+      can [:read], [Project]
     elsif user.provider?
       can [:manage, :needs_money], [Project]
       can [:show], [Investment]
