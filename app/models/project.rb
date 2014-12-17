@@ -14,7 +14,7 @@ class Project < ActiveRecord::Base
 
   def self.seed_data!
     20.times do |number|
-      @user_id = 11 + (number/10)
+      user_id = 11 + (number/10)
       Project.create(
       :format => ['json', 'xml'].sample,
       :api_key => Faker::Internet.password,
@@ -39,7 +39,7 @@ class Project < ActiveRecord::Base
       :irr => rand(-5..10),
       :project_score => rand(0..100),
       :status => ['Funded', 'Not Funded'].sample,
-      :user_id => @user_id
+      :user_id => user_id
       )
     end
   end

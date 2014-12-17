@@ -1,16 +1,26 @@
 <h1>GET INVESTED!</h1>
-<%= image_tag("wateringplant.jpg", size: "618x343",:alt => "rss feed") %>
+<%= image_tag("wateringplant.jpg", size: "618x343", :alt => "rss feed") %>
+<% if current_user.investor? || current_user.admin? || current_user.manager? %>
 
+<% else %>
+  <h3>Renewable Yield loans money to small residential solar
+    providers to fund their projects and then takes those loans
+    and breaks the cash flow into various tranches differentiated
+    by term and interest rate.</h3>
+  <h3>
+    Investors will be receive a diversified pro rata cash flow
+    share of all of the loans outstanding at the time of issue
+    rather than the cash flow of just one particular solar project.
+  </h3>
+<% end %>
 <table>
   <thead>
   <tr>
-    <th> Term</th>
+    <th>Term</th>
     <th>Interest rate</th>
     <th>Minimum order</th>
     <th>Denomination</th>
     <th>Maturity date</th>
-    <!--<th>Issue date</th>-->
-    <!--<th>Offer start period</th>-->
     <th>Offer end period</th>
     <th colspan="3"></th>
   </tr>
@@ -18,11 +28,10 @@
 
   <tbody>
   <%= content_tag_for(:tr, @investments) do |investment| %>
-    <!--<tr id='<%# dom_id(investment) %>'>-->
     <td><%= investment.term %> Year</td>
     <td><%= number_to_percentage(investment.interest_rate, precision: 2) %></td>
     <td><%= number_to_currency(investment.minimum_order, precision: 2) %></td>
-    <td><%= number_to_currency(investment.denomination, precision:2) %></td>
+    <td><%= number_to_currency(investment.denomination, precision: 2) %></td>
     <td><%= investment.maturity_date.strftime('%B %-d, %Y') %></td>
     <td><%# investment.issue_date %></td>
     <td><%# investment.offer_start_period %></td>
@@ -45,7 +54,6 @@
       <% end %>
     <% end %>
   <% end %>
-  <!--</tr>-->
   </tbody>
 </table>
 <%= will_paginate @investments %>

@@ -19,7 +19,7 @@ feature 'Investment Associations' do
       click_link 'Invest'
     end
 
-    expect(page).to have_text("#{@investment1.term} #{@investment1.interest_rate} has been moved to your inventory.")
+    expect(page).to have_text("#{@investment1.term} Year #{number_to_percentage(@investment1.interest_rate, precision: 2)} has been moved to your inventory.")
     expect(page).to_not have_selector("#investment_#{@investment1.id}")
     expect(page).to have_selector("#investment_#{@investment2.id}")
 

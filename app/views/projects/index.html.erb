@@ -2,91 +2,10 @@
 <h1>GET FUNDED!</h1>
 <%= image_tag("solar_panels.jpg", size: "618x343", :alt => "rss feed") %>
 
-<h2>We have funded <%= Project.where("Status = 'Funded'").count %>
-  projects for a total of <%= number_to_currency(Project.where("Status = 'Funded'").count * 20_000) %> to date.</h2>
+<h2>We have funded <%= @projects_count %> projects for a total of <%= @projects_value %> to date.</h2>
 
-   <% if current_user.provider? || current_user.admin? || current_user.manager? %>
-  <h2> If you want to submit a project click here => <%= link_to 'New Project', new_project_path %> </h2>
-  <!--<%# will_paginate @projects %>-->
-  <table>
-    <thead>
-    <tr>
-      <!--<th>Format</th>-->
-      <!--<th>Api key</th>-->
-      <th>System capacity</th>
-      <!--<th>Module type</th>-->
-      <!--<th>Losses</th>-->
-      <!--<th>Array type</th>-->
-      <!--<th>Tilt</th>-->
-      <!--<th>Azimuth</th>-->
-      <th>Address</th>
-      <th>Lat</th>
-      <th>Lon</th>
-      <!--<th>File id</th>-->
-      <!--<th>Dataset</th>-->
-      <!--<th>Radius</th>-->
-      <!--<th>Timeframe</th>-->
-      <!--<th>Dc ac ratio</th>-->
-      <!--<th>Gcr</th>-->
-      <!--<th>Inv eff</th>-->
-      <!--<th>Callback</th>-->
-      <th>Npv</th>
-      <th>Irr</th>
-      <th>Project score</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <%= content_tag_for(:tr, @projects) do |project| %>
-
-      <%# @projects.each do |project| %>
-      <!--<tr id='<%# dom_id(project) %>'>-->
-      <!--<td><%# project.format %></td>-->
-      <!--<td><%# project.api_key %></td>-->
-      <td><%= project.system_capacity %> kW</td>
-      <!--<td><%# project.module_type %></td>-->
-      <!--<td><%# project.losses %></td>-->
-      <!--<td><%# project.array_type %></td>-->
-      <!--<td><%# project.tilt %></td>-->
-      <!--<td><%# project.azimuth %></td>-->
-      <td><%= project.address.byteslice(project.address.length - project.address.reverse.index(',') + 1, 2) %></td>
-      <td><%= BigDecimal(project.lat).round(2) %></td>
-      <td><%= BigDecimal(project.lon).round(2) %></td>
-      <!--<td><%# project.file_id %></td>-->
-      <!--<td><%# project.dataset %></td>-->
-      <!--<td><%# project.radius %></td>-->
-      <!--<td><%# project.timeframe %></td>-->
-      <!--<td><%# project.dc_ac_ratio %></td>-->
-      <!--<td><%# project.gcr %></td>-->
-      <!--<td><%# project.inv_eff %></td>-->
-      <!--<td><%# project.callback %></td>-->
-      <td><%= number_to_currency(project.npv, precision: 0) %></td>
-      <td><%= number_to_percentage(project.irr, precision: 2) %></td>
-      <td><%= project.project_score %></td>
-      <td><%= project.status %></td>
-      <% if current_user %>
-        <% if can? :manage, project %>
-          <td>
-            <% if current_user.projects.include?(project) || current_user.admin?%>
-              <!--<%# link_to 'Withdraw', withdraw_project_path(project) %>-->
-              <%= link_to 'Show', project %>
-              <% if project.status == 'Not Funded' || current_user.admin? || current_user.manager? %>
-                <%= link_to 'Edit', edit_project_path(project) %>
-                <%= link_to 'Destroy', project, method: :delete, data: {confirm: 'Are you sure?'} %>
-              <% end %>
-              <%# link_to 'Submit', submit_project_path(project) %>
-              </td>
-            <% else %>
-            <% end %>
-        <% end %>
-      <% end %>
-    <% end %>
-    </tbody>
-  </table>
-  <%= will_paginate @projects %>
-  <br>
+<% if current_user.provider? || current_user.admin? || current_user.manager? %>
+  <%= render 'provider' %>
 <% else %>
   <%= render 'non_provider' %>
 <% end %>

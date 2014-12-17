@@ -1,11 +1,13 @@
 class InvestmentsController < ApplicationController
+  include ActionView::Helpers::NumberHelper
+
   load_and_authorize_resource
   before_action :set_investment, only: [:show, :edit, :update, :destroy, :invest, :divest]
 
   def invest
     if current_user
       current_user.investments << @investment
-      redirect_to investments_path, notice: "#{@investment.term} #{@investment.interest_rate} has been moved to your inventory."
+      redirect_to investments_path, notice: "#{@investment.term} Year #{number_to_percentage(@investment.interest_rate, precision: 2)}  has been moved to your inventory."
     end
   end
 

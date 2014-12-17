@@ -35,17 +35,36 @@ class User < ActiveRecord::Base
 
   def self.seed_data!
     20.times do |number|
-      @first_name = Faker::Name.first_name
-      @password = Faker::Internet.password
+      first_name = Faker::Name.first_name
       if number >= 10
-        @role = 'provider'
+        role = 'provider'
+        if number == 10
+          email = Faker::Internet.free_email(role)
+          password = role
+        else
+          email = Faker::Internet.free_email(first_name)
+          password = Faker::Internet.password
+        end
+      elsif number == 0
+        role = 'admin'
+        email = Faker::Internet.free_email(role)
+        password = role
+      elsif number == 1
+        role = 'manager'
+        email = Faker::Internet.free_email(role)
+        password = role
+      elsif number == 2
+        role = 'investor'
+        email = Faker::Internet.free_email(role)
+        password = role
       else
-        @role = 'investor'
+        email = Faker::Internet.free_email(first_name)
+        password = Faker::Internet.password
       end
 
       user = User.create!(
         :company_name => Faker::Company.name,
-        :first_name => @first_name,
+        :first_name => first_name,
         :middle_name => Faker::Name.first_name,
         :last_name => Faker::Name.last_name,
         :phone_number => Faker::PhoneNumber.cell_phone,
@@ -53,11 +72,11 @@ class User < ActiveRecord::Base
         :city => Faker::Address.city,
         :state => Faker::Address.state_abbr,
         :zip => Faker::Address.zip_code,
-        :email => Faker::Internet.free_email(@first_name),
+        :email => email,
         :ssn => Faker::Number.number(9),
-        :password => @password,
-        :password_confirmation => @password,
-        :role => @role
+        :password => password,
+        :password_confirmation => password,
+        :role => role
       )
     end
   end

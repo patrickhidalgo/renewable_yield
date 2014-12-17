@@ -50,7 +50,6 @@
   <div class="field">
     <%= f.label :email %><br>
     <%= f.text_field :email %>
-    <%# f.collection_select :email, User::ROLES, to_s, :humanize %>
   </div>
   <div class="field">
     <%= f.label :ssn %><br>
@@ -66,7 +65,7 @@
   </div>
   <div class="field">
     <%= f.label :role %><br>
-    <%= f.collection_select :role, User::ROLES, :to_s, :humanize %>
+    <%= f.collection_select :role, User::ROLES[2..3], :to_s, :humanize %>
   </div>
   <div class="actions">
     <%= f.submit 'Signup' %>

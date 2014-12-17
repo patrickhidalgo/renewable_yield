@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  include ActionView::Helpers::NumberHelper
+
   load_and_authorize_resource
   before_action :set_project, only: [:show, :edit, :update, :destroy, :submit, :withdraw]
 
@@ -17,6 +19,8 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all.paginate(page: params[:page])
+    @projects_count = Project.where(:status => 'Funded').count
+    @projects_value = number_to_currency(@projects_count * 20_000, precision: 2)
   end
 
   def my_projects

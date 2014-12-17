@@ -25,20 +25,26 @@
   </strong>
 </p>
 
-<%= content_tag_for(:tr, @investments) do |investment| %>
-  <% if current_user %>
-    <% if can? :update, investment %>
-      <%= link_to 'Edit', edit_investment_path(investment) %>
-    <% end %>
-    <% if can? :has_money, investment %>
-      <% if current_user.investments.include?(investment) %>
-        <%= link_to 'Back', my_investments_path %>
-      <% end %>
-    <% end %>
+<% if current_user %>
+  <% if can? :update, @investment %>
+    <%= link_to 'Edit', edit_investment_path(@investment) %>
   <% end %>
+  <% if can? :has_money, @investment %>
+    <% if current_user.investments.include?(@investment) %>
+      <%= "If you need to divest, click" %>
+      <%= link_to 'Divest', divest_investment_path(@investment) %>
+      <br>
+    <% else %>
+      <%= "If you want to invest, click" %>
+      <%= link_to 'Invest', invest_investment_path(@investment) %>
+      <br>
+    <% end %>
+    <%= link_to 'Back', my_investments_path %>
+  <% end %>
+<% else %>
+  <br>
+  <%= link_to 'Back', :back %>
 <% end %>
-
-<%= link_to 'Back', :back %>
 <br>
 <%= link_to 'Home', root_path %>
 <br>
